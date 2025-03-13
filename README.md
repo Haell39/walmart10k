@@ -91,4 +91,4 @@ Este projeto foi desenvolvido como parte de uma série de desafios SQL. Procuro 
 
 ## 📧 Contato
 
-Se tiver alguma dúvida ou sugestão, entre em contato comigo pelo [rafaeldutrapro@gmail.com](mailto:seu_email@exemplo.com)
+Se tiver alguma dúvida ou sugestão, entre em contato comigo pelo email: rafaeldutrapro@gmail.com

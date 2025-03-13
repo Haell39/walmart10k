@@ -1,6 +1,6 @@
 # Projeto Walmart Sales Data Analysis
 
-Olá, sou Rafael e desenvolvi este projeto para analisar dados de vendas da Walmart. O objetivo foi extrair, limpar e explorar um dataset com 10.000 registros de vendas, utilizando Python e SQL, além de exportar os dados tratados para bancos MySQL e PostgreSQL. A seguir, apresento um resumo do projeto e as instruções básicas para executá-lo.
+Olá, sou Rafael e desenvolvi este projeto para analisar dados de vendas da Walmart. O objetivo foi extrair, limpar e explorar um dataset com 10.000 registros de vendas, utilizando Python e SQL, além de exportar os dados tratados para os bancos MySQL ou PostgreSQL. A seguir, apresento um resumo do projeto e as instruções básicas para executá-lo.
 
 ---
 

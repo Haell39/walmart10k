@@ -7,13 +7,14 @@ Olá, sou Rafael e desenvolvi este projeto para analisar dados de vendas da Walm
 ## ✨ Visão Geral
 
 - **Fonte dos Dados:** Baixei o dataset de vendas da Walmart via API do Kaggle.
-- **Processamento dos Dados:**  
+- **Processamento dos Dados:**
+
   - Criação e ativação de ambiente virtual em Python.
   - Download e descompactação dos dados.
   - Limpeza e tratamento dos dados (remoção de duplicatas, tratamento de valores nulos e formatação de colunas, como a conversão de preços para o tipo numérico).
   - Criação de novas colunas, como o cálculo do valor total da venda (unit_price × quantity).
 
-- **Integração com Bancos de Dados:**  
+- **Integração com Bancos de Dados:**
   - Exportação dos dados limpos para MySQL e PostgreSQL utilizando SQLAlchemy.
   - Execução de queries para resolver diversos problemas de negócio, como análise de métodos de pagamento, desempenho por filial e categorização de vendas por turno.
 
@@ -55,7 +56,7 @@ Olá, sou Rafael e desenvolvi este projeto para analisar dados de vendas da Walm
    pip install -r requirements.txt
    ```
 
-4. **Baixe o dataset via API do Kaggle:**
+4. **Baixe o dataset via API do Kaggle pelo terminal:**
 
    Certifique-se de ter seu token configurado em `~/.kaggle/kaggle.json` e execute:
 
@@ -64,9 +65,23 @@ Olá, sou Rafael e desenvolvi este projeto para analisar dados de vendas da Walm
    unzip walmart-sales-data.zip
    ```
 
+   4.1. **Ou pelo arquivo .py:**
+
+   ```bash
+
+   import kaggle
+   kaggle.api.authenticate()
+   kaggle.api.dataset_download_files('najir0123/walmart-10k-sales-datasets', path='.', unzip=True)
+
+   # Site to download the dataset: https://www.kaggle.com/najir0123/walmart-10k-sales-datasets
+   ```
+
+<br>
+
 5. **Execute os scripts de limpeza e análise:**
 
    Abra o projeto no VS Code e execute os notebooks ou scripts Python para:
+
    - Processar e limpar os dados.
    - Exportar os dados para MySQL e PostgreSQL.
    - Realizar as consultas SQL para solucionar os problemas de negócio.
@@ -85,7 +100,7 @@ Olá, sou Rafael e desenvolvi este projeto para analisar dados de vendas da Walm
 
 ## 🔍 Considerações Finais
 
-Este projeto foi desenvolvido como parte de uma série de desafios SQL. Procuro sempre melhorar meus conhecimentos em manipulação de dados, integração entre ferramentas e análise de negócio. Sinta-se à vontade para explorar, modificar e sugerir melhorias!
+...
 
 ---
 

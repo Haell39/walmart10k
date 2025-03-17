@@ -1,0 +1,103 @@
+Microsoft Windows [versão 10.0.26100.3476]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\rafae>mysql -u root -p 2025TI
+Enter password: ******
+ERROR 1049 (42000): Unknown database '2025ti'
+
+C:\Users\rafae>mysql -u root
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+
+C:\Users\rafae>mysql -u root -p
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.41 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.18 sec)
+
+mysql> CREATE DATABASE walmart_db
+    -> SHOW DATABASES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SHOW DATABASES' at line 2
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.14 sec)
+
+mysql> CREATE DATABASE walmart_db;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| walmart_db         |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> USE walmart_db;
+Database changed
+mysql> SHOW TABLES;
+Empty set (0.04 sec)
+
+mysql> SHOW TABLES;
++----------------------+
+| Tables_in_walmart_db |
++----------------------+
+| walmart              |
++----------------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT COUNT(*) FROM walmart;
++----------+
+| COUNT(*) |
++----------+
+|     9969 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM walmart LIMIT 10;
++------------+---------+-------------+------------------------+------------+----------+----------+----------+----------------+--------+---------------+-------------------+
+| invoice_id | Branch  | City        | category               | unit_price | quantity | date     | time     | payment_method | rating | profit_margin | total             |
++------------+---------+-------------+------------------------+------------+----------+----------+----------+----------------+--------+---------------+-------------------+
+|          1 | WALM003 | San Antonio | Health and beauty      |      74.69 |        7 | 05/01/19 | 13:08:00 | Ewallet        |    9.1 |          0.48 | 522.8299999999999 |
+|          2 | WALM048 | Harlingen   | Electronic accessories |      15.28 |        5 | 08/03/19 | 10:29:00 | Cash           |    9.6 |          0.48 | 76.39999999999999 |
+|          3 | WALM067 | Haltom City | Home and lifestyle     |      46.33 |        7 | 03/03/19 | 13:23:00 | Credit card    |    7.4 |          0.33 |            324.31 |
+|          4 | WALM064 | Bedford     | Health and beauty      |      58.22 |        8 | 27/01/19 | 20:33:00 | Ewallet        |    8.4 |          0.33 |            465.76 |
+|          5 | WALM013 | Irving      | Sports and travel      |      86.31 |        7 | 08/02/19 | 10:37:00 | Ewallet        |    5.3 |          0.48 | 604.1700000000001 |
+|          6 | WALM026 | Denton      | Electronic accessories |      85.39 |        7 | 25/03/19 | 18:30:00 | Ewallet        |    4.1 |          0.48 |            597.73 |
+|          7 | WALM088 | Cleburne    | Electronic accessories |      68.84 |        6 | 25/02/19 | 14:36:00 | Ewallet        |    5.8 |          0.33 |            413.04 |
+|          8 | WALM100 | Canyon      | Home and lifestyle     |      73.56 |       10 | 24/02/19 | 11:38:00 | Ewallet        |      8 |          0.18 |             735.6 |
+|          9 | WALM066 | Grapevine   | Health and beauty      |      36.26 |        2 | 10/01/19 | 17:15:00 | Credit card    |    7.2 |          0.33 |             72.52 |
+|         10 | WALM065 | Texas City  | Food and beverages     |      54.84 |        3 | 20/02/19 | 13:27:00 | Credit card    |    5.9 |          0.33 |            164.52 |
++------------+---------+-------------+------------------------+------------+----------+----------+----------+----------------+--------+---------------+-------------------+
+10 rows in set (0.01 sec)
+
+mysql>

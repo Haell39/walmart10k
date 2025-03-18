@@ -1,3 +1,94 @@
+
+------------------------------MYSQL80 WorkBench codes---------------------------------
+
+-- USE walmart_db;
+-- SELECT * FROM walmart LIMIT 5;
+SELECT * FROM walmart;
+
+SELECT COUNT(*) FROM walmart;
+
+SELECT DISTINCT payment_method FROM walmart;
+
+
+
+SELECT COUNT(DISTINCT Branch)
+FROM walmart;
+
+SELECT MAX(quantity) FROM walmart;
+SELECT MIN(quantity) FROM walmart;
+
+-- Business Problems
+
+-- 1. Encontre os diferentes metodos de pagamento e numero de transições, e tambem a quantidade vendida:
+
+
+
+/*
+2. Identifique a categoria com a classificação mais alta em cada filial
+● Pergunta: Qual categoria recebeu a classificação média mais alta em cada filial?
+*/
+
+SELECT *
+FROM
+(
+    SELECT
+        branch,
+        category,
+        AVG(rating) AS avg_rating,
+        RANK() OVER (PARTITION BY branch ORDER BY AVG(rating) DESC) AS ranking
+    FROM walmart
+    GROUP BY branch, category
+)
+AS ranked
+WHERE ranking = 1;
+/*
+Determine the Busiest Day for Each Branch
+● Question: What is the busiest day of the week for each branch based on transaction
+volume?
+*/
+
+SELECT
+    date,
+    STR_TO_DATE(date, '%d/%m/%y') AS formated_date
+FROM walmart;
+
+SELECT
+date,
+DAYNAME(STR_TO_DATE(date, '%d/%m/%y')) AS day_name
+FROM walmart;
+
+
+SELECT *
+FROM (
+    SELECT
+        branch,
+        DAYNAME(STR_TO_DATE(date, '%d/%m/%y')) AS day_name,
+        COUNT(*) AS no_transactions,
+        RANK() OVER (PARTITION BY branch ORDER BY COUNT(*) DESC) AS ranking
+    FROM walmart
+    GROUP BY branch, DAYNAME(STR_TO_DATE(date, '%d/%m/%y'))
+) AS ranked
+WHERE ranking = 1;
+
+/*
+Calculate Total Quantity Sold by Payment Method
+● Question: How many items were sold through each payment method?
+*/
+
+SELECT
+	DISTINCT payment_method,
+    SUM(quantity) AS no_qty_sold
+FROM walmart
+GROUP BY payment_method;
+
+ /*
+ 5. Analyze Category Ratings by City
+● Question: What are the average, minimum, and maximum ratings for each category in
+each city?
+ */
+
+
+---------------------------------CMD codes---------------------------------
 Microsoft Windows [versão 10.0.26100.3476]
 (c) Microsoft Corporation. Todos os direitos reservados.
 
@@ -101,3 +192,6 @@ mysql> SELECT * FROM walmart LIMIT 10;
 10 rows in set (0.01 sec)
 
 mysql>
+
+
+

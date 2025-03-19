@@ -3,6 +3,8 @@
 
 -- USE walmart_db;
 -- SELECT * FROM walmart LIMIT 5;
+-- USE walmart_db;
+SELECT * FROM walmart LIMIT 5;
 SELECT * FROM walmart;
 
 SELECT COUNT(*) FROM walmart;
@@ -86,6 +88,67 @@ GROUP BY payment_method;
 ● Question: What are the average, minimum, and maximum ratings for each category in
 each city?
  */
+
+SELECT * FROM walmart LIMIT 5;
+
+SELECT
+city,
+category,
+MIN(rating) AS min_rating,
+MAX(rating) AS max_rating,
+AVG(rating) AS avg_rating
+FROM walmart
+GROUP BY 1, 2;
+
+ /*
+ 6. Calculate Total Profit by Category
+● Question: What is the total profit for each category, ranked from highest to lowest?
+ */
+
+ SELECT
+ category,
+ SUM(total)
+ FROM walmart
+ GROUP BY 1;
+
+ SELECT
+ category,
+ ROUND(SUM(total), 2) AS total_revenue,
+ ROUND(SUM(total * profit_margin), 2)AS profit
+ FROM walmart
+ GROUP BY 1
+ ORDER BY profit DESC;
+
+  /*
+ 7. Determine the Most Common Payment Method per Branch
+● Question: What is the most frequently used payment method in each branch?
+ */
+
+SELECT * FROM walmart LIMIT 5;
+
+SELECT
+branch,
+payment_method,
+COUNT(*) AS total_trans
+FROM walmart
+GROUP BY 1, 2
+ORDER BY total_trans DESC;
+
+
+WITH cte
+AS
+(
+SELECT
+branch,
+payment_method,
+COUNT(*) AS total_trans,
+RANK() OVER(PARTITION BY branch ORDER BY COUNT(*) DESC) AS ranking
+FROM walmart
+GROUP BY 1, 2
+)
+SELECT *
+FROM cte
+WHERE ranking = 1;
 
 
 ---------------------------------CMD codes---------------------------------

@@ -2,8 +2,6 @@
 ------------------------------MYSQL80 WorkBench codes---------------------------------
 
 -- USE walmart_db;
--- SELECT * FROM walmart LIMIT 5;
--- USE walmart_db;
 SELECT * FROM walmart LIMIT 5;
 SELECT * FROM walmart;
 
@@ -149,6 +147,93 @@ GROUP BY 1, 2
 SELECT *
 FROM cte
 WHERE ranking = 1;
+
+/*
+8. Analyze Sales Shifts Throughout the Day
+● Question: How many transactions occur in each shift (Morning, Afternoon, Evening)
+across branches?
+*/
+
+SELECT
+*,
+TIME(time)
+FROM walmart;
+
+
+SELECT
+*,
+CASE
+WHEN HOUR(TIME(time)) < 12 THEN 'Morning'
+WHEN HOUR(TIME(time)) BETWEEN 12 AND 17 THEN 'Afternoon'
+ELSE 'Evening'
+END AS day_time
+FROM walmart;
+
+
+SELECT
+CASE
+WHEN HOUR(TIME(time)) < 12 THEN 'Morning'
+WHEN HOUR(TIME(time)) BETWEEN 12 AND 17 THEN 'Afternoon'
+ELSE 'Evening'
+END AS day_time,
+COUNT(*) AS total_transacoes
+FROM walmart
+GROUP BY day_time
+ORDER BY total_transacoes;
+
+SELECT
+branch,
+CASE
+WHEN HOUR(TIME(time)) < 12 THEN 'Morning'
+WHEN HOUR(TIME(time)) BETWEEN 12 AND 17 THEN 'Afternoon'
+ELSE 'Evening'
+END AS day_time,
+COUNT(*) AS total_transacoes
+FROM walmart
+GROUP BY 1, 2
+ORDER BY 1, 3 DESC;
+
+
+/*
+9. Identify Branches with Highest Revenue Decline Year-Over-Year
+● Question: Which branches experienced the largest decrease in revenue compared to
+the previous year?
+*/
+
+
+WITH revenue_2022 AS (
+    SELECT
+        branch,
+        SUM(total) AS revenue
+    FROM walmart
+    WHERE YEAR(STR_TO_DATE(date, '%d/%m/%y')) = 2022
+    GROUP BY branch
+),
+revenue_2023 AS (
+    SELECT
+        branch,
+        SUM(total) AS revenue
+    FROM walmart
+    WHERE YEAR(STR_TO_DATE(date, '%d/%m/%y')) = 2023
+    GROUP BY branch
+)
+SELECT
+    ls.branch,
+    ls.revenue AS lastYear_revenue,
+    cs.revenue AS currentYear_revenue,
+    (ls.revenue - IFNULL(cs.revenue, 0)) AS revenue_drop, -- Evita erro se cs.revenue for NULL
+    ROUND(((ls.revenue - IFNULL(cs.revenue, 0)) / ls.revenue) * 100, 2) AS revenue_decline_ratio
+FROM revenue_2022 AS ls
+LEFT JOIN revenue_2023 AS cs -- LEFT JOIN garante que todas as filiais de 2022 apareçam
+ON ls.branch = cs.branch
+WHERE ls.revenue > IFNULL(cs.revenue, 0)
+ORDER BY 5 DESC LIMIT 5;
+
+-- apenas pra ve o ano
+SELECT *,
+       YEAR(STR_TO_DATE(date, '%d/%m/%y')) AS formated_date
+FROM walmart;
+
 
 
 ---------------------------------CMD codes---------------------------------

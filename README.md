@@ -88,19 +88,13 @@ Olá, sou Rafael e desenvolvi este projeto para analisar dados de vendas da Walm
 
 ---
 
-## 📂 Estrutura do Projeto
+## 📂 Estrutura do Projeto  
 
-- **`data/`**: Dataset original e arquivo limpo.
-- **`notebooks/`**: Jupyter Notebooks demonstrando cada etapa do projeto.
-- **`scripts/`**: Scripts Python para automação da limpeza, exportação e análise.
-- **`requirements.txt`**: Lista de bibliotecas necessárias.
-- **`README.md`**: Este arquivo.
-
----
-
-## 🔍 Considerações Finais
-
-...
+- **`.idea/`**: Configurações do ambiente de desenvolvimento (caso esteja utilizando um IDE como PyCharm).  
+- **`Questoes_de_negocios`**: Pasta contendo as Queries feitas no MySQL e as principais questões de análise de negócio abordadas no projeto em formato markdown.  
+- **`notebooks/`**: Jupyter Notebooks demonstrando cada etapa do pipeline ETL e análise de dados.  
+- **`requirements.txt`**: Lista de bibliotecas Python necessárias para rodar o projeto.  
+- **`README.md`**: Este arquivo, com instruções e detalhes do projeto.  
 
 ---
 

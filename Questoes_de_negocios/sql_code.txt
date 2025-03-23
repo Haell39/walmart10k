@@ -27,7 +27,6 @@ SELECT MIN(quantity) FROM walmart;
 2. Identifique a categoria com a classificação mais alta em cada filial
 ● Pergunta: Qual categoria recebeu a classificação média mais alta em cada filial?
 */
-
 SELECT *
 FROM
 (
@@ -41,12 +40,11 @@ FROM
 )
 AS ranked
 WHERE ranking = 1;
-/*
-Determine the Busiest Day for Each Branch
-● Question: What is the busiest day of the week for each branch based on transaction
-volume?
-*/
 
+/*
+3. Determine o dia mais movimentado para cada filial  
+● Pergunta: Qual é o dia da semana mais movimentado para cada filial com base no volume de transações?
+*/
 SELECT
     date,
     STR_TO_DATE(date, '%d/%m/%y') AS formated_date
@@ -71,10 +69,9 @@ FROM (
 WHERE ranking = 1;
 
 /*
-Calculate Total Quantity Sold by Payment Method
-● Question: How many items were sold through each payment method?
+4. Calcule a quantidade total vendida por método de pagamento
+● Pergunta: Quantos itens foram vendidos por cada método de pagamento?
 */
-
 SELECT
 	DISTINCT payment_method,
     SUM(quantity) AS no_qty_sold
@@ -82,11 +79,9 @@ FROM walmart
 GROUP BY payment_method;
 
  /*
- 5. Analyze Category Ratings by City
-● Question: What are the average, minimum, and maximum ratings for each category in
-each city?
+ 5. Analise as avaliações por categoria em cada cidade
+● Pergunta: Quais são as avaliações média, mínima e máxima para cada categoria em cada cidade?
  */
-
 SELECT * FROM walmart LIMIT 5;
 
 SELECT
@@ -99,10 +94,9 @@ FROM walmart
 GROUP BY 1, 2;
 
  /*
- 6. Calculate Total Profit by Category
-● Question: What is the total profit for each category, ranked from highest to lowest?
+ 6. Calcule o lucro total por categoria
+● Pergunta: Qual é o lucro total de cada categoria, classificado do maior para o menor?
  */
-
  SELECT
  category,
  SUM(total)
@@ -118,10 +112,9 @@ GROUP BY 1, 2;
  ORDER BY profit DESC;
 
   /*
- 7. Determine the Most Common Payment Method per Branch
-● Question: What is the most frequently used payment method in each branch?
+ 7. Determine o método de pagamento mais comum por filial
+● Pergunta: Qual é o método de pagamento mais utilizado em cada filial?
  */
-
 SELECT * FROM walmart LIMIT 5;
 
 SELECT
@@ -149,11 +142,9 @@ FROM cte
 WHERE ranking = 1;
 
 /*
-8. Analyze Sales Shifts Throughout the Day
-● Question: How many transactions occur in each shift (Morning, Afternoon, Evening)
-across branches?
+8. Analise os turnos de vendas ao longo do dia
+● Pergunta: Quantas transações ocorrem em cada turno (Manhã, Tarde, Noite) em todas as filiais?
 */
-
 SELECT
 *,
 TIME(time)
@@ -195,12 +186,9 @@ ORDER BY 1, 3 DESC;
 
 
 /*
-9. Identify Branches with Highest Revenue Decline Year-Over-Year
-● Question: Which branches experienced the largest decrease in revenue compared to
-the previous year?
+9. Identifique as filiais com maior queda de receita ano a ano
+● Pergunta: Quais filiais tiveram a maior redução de receita em comparação com o ano anterior?
 */
-
-
 WITH revenue_2022 AS (
     SELECT
         branch,
